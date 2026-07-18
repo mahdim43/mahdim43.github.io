@@ -270,20 +270,15 @@ import Layout from '../layouts/Layout.astro';
         </p>
         <div class="projects-list">
           <article class="project-row">
-            <div class="project-row-left">
-              <span class="project-number">01</span>
-              <div class="project-info">
-                <span class="project-category">VoIP Infrastructure</span>
-                <h3 class="project-title">Multi-Sector VoIP Deployment</h3>
-                <p class="project-desc">Implemented VoIP services for a hotel, residential complex, taxi service center and trading companies. Configured Asterisk/Issabel servers, IVR, call queues and SIP trunks.</p>
-                <div class="project-metric">
-                  <span class="metric-value">4</span>
-                  <span class="metric-label">Business Sectors</span>
-                </div>
+            <span class="project-number">01</span>
+            <div class="project-info">
+              <span class="project-category">VoIP Infrastructure</span>
+              <h3 class="project-title">Multi-Sector VoIP Deployment</h3>
+              <p class="project-desc">Implemented VoIP services for a hotel, residential complex, taxi service center and trading companies. Configured Asterisk/Issabel servers, IVR, call queues and SIP trunks.</p>
+              <div class="project-metric">
+                <span class="metric-value">4</span>
+                <span class="metric-label">Business Sectors</span>
               </div>
-            </div>
-            <div class="project-row-right">
-              <div class="project-image-placeholder" style="background: linear-gradient(135deg, #1a1520 0%, #2a1f2d 40%, rgba(233,184,114,0.1) 100%);"></div>
               <div class="skill-tags">
                 <span class="tag">Asterisk</span>
                 <span class="tag">Issabel</span>
@@ -294,20 +289,15 @@ import Layout from '../layouts/Layout.astro';
           </article>
 
           <article class="project-row">
-            <div class="project-row-left">
-              <span class="project-number">02</span>
-              <div class="project-info">
-                <span class="project-category">Network & Virtualization</span>
-                <h3 class="project-title">Enterprise Network Design</h3>
-                <p class="project-desc">Designed and implemented secure LAN infrastructure including VLAN segmentation, firewall rules and VPN access. Deployed VMware ESXi virtualization environment.</p>
-                <div class="project-metric">
-                  <span class="metric-value">20</span>
-                  <span class="metric-label">Users Supported</span>
-                </div>
+            <span class="project-number">02</span>
+            <div class="project-info">
+              <span class="project-category">Network & Virtualization</span>
+              <h3 class="project-title">Enterprise Network Design</h3>
+              <p class="project-desc">Designed and implemented secure LAN infrastructure including VLAN segmentation, firewall rules and VPN access. Deployed VMware ESXi virtualization environment.</p>
+              <div class="project-metric">
+                <span class="metric-value">20</span>
+                <span class="metric-label">Users Supported</span>
               </div>
-            </div>
-            <div class="project-row-right">
-              <div class="project-image-placeholder" style="background: linear-gradient(135deg, #151a20 0%, #1a2a2d 40%, rgba(127,212,198,0.1) 100%);"></div>
               <div class="skill-tags">
                 <span class="tag">MikroTik</span>
                 <span class="tag">VMware</span>
@@ -318,20 +308,15 @@ import Layout from '../layouts/Layout.astro';
           </article>
 
           <article class="project-row">
-            <div class="project-row-left">
-              <span class="project-number">03</span>
-              <div class="project-info">
-                <span class="project-category">ERP & Business Systems</span>
-                <h3 class="project-title">Odoo ERP Deployment</h3>
-                <p class="project-desc">Installed and configured Odoo ERP including CRM and sales modules. Automated internal workflows and improved reporting structure for management team.</p>
-                <div class="project-metric">
-                  <span class="metric-value">30</span>
-                  <span class="metric-label">Users Onboarded</span>
-                </div>
+            <span class="project-number">03</span>
+            <div class="project-info">
+              <span class="project-category">ERP & Business Systems</span>
+              <h3 class="project-title">Odoo ERP Deployment</h3>
+              <p class="project-desc">Installed and configured Odoo ERP including CRM and sales modules. Automated internal workflows and improved reporting structure for management team.</p>
+              <div class="project-metric">
+                <span class="metric-value">30</span>
+                <span class="metric-label">Users Onboarded</span>
               </div>
-            </div>
-            <div class="project-row-right">
-              <div class="project-image-placeholder" style="background: linear-gradient(135deg, #1a1a15 0%, #2a2a1d 40%, rgba(233,184,114,0.08) 100%);"></div>
               <div class="skill-tags">
                 <span class="tag">Odoo</span>
                 <span class="tag">CRM</span>
@@ -497,16 +482,14 @@ import Layout from '../layouts/Layout.astro';
 
   /* PROJECTS */
   .projects-list { display: flex; flex-direction: column; gap: 0; }
-  .project-row { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; padding: 48px 0; border-bottom: 1px solid var(--line); }
+  .project-row { display: flex; gap: 24px; align-items: flex-start; padding: 48px 0; border-bottom: 1px solid var(--line); }
   .project-row:first-child { padding-top: 0; }
   .project-row:last-child { border-bottom: none; }
-  .project-row-left { display: flex; gap: 24px; align-items: flex-start; }
   .project-number { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--fg-faint); flex-shrink: 0; padding-top: 4px; }
   .project-info { flex: 1; }
   .project-category { font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); display: block; margin-bottom: 8px; }
   .project-title { font-size: 1.5rem; margin-bottom: 12px; color: #fff; }
   .project-desc { font-size: 15px; line-height: 1.7; color: var(--fg-muted); margin-bottom: 20px; }
-  .project-row-right { display: flex; flex-direction: column; gap: 16px; }
   .project-metric { display: flex; align-items: baseline; gap: 8px; padding-top: 16px; border-top: 1px solid var(--line); }
   .metric-value { font-family: 'Fraunces', serif; font-size: 1.5rem; color: var(--accent); }
   .metric-label { font-size: 13px; color: var(--fg-muted); }
@@ -552,8 +535,7 @@ import Layout from '../layouts/Layout.astro';
     .footer-inner { flex-direction: column; gap: 16px; text-align: center; }
     .footer-right { flex-wrap: wrap; justify-content: center; }
     .hero-glow { display: none; }
-    .project-row-left { flex-direction: column; gap: 12px; }
-    .project-number { padding-top: 0; }
+    .project-row { flex-direction: column; gap: 12px; }
   }
 </style>
 
