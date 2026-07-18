@@ -1,0 +1,114 @@
+---
+interface Props {
+  title: string;
+}
+const { title } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Mahdi Hooshmand - Network & Infrastructure Specialist with 5+ years in VoIP, server management, virtualization and ERP implementation." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Fraunces:opsz,wght@9..144,400;9..144,700&display=swap" rel="stylesheet" />
+    <title>{title}</title>
+    <meta property="og:title" content="Mahdi Hooshmand | Network & Infrastructure Specialist" />
+    <meta property="og:description" content="5+ years in network deployment, VoIP, server management, virtualization and ERP implementation." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Mahdi Hooshmand",
+      "jobTitle": "Network & Infrastructure Specialist",
+      "url": "https://your-domain.netlify.app",
+      "sameAs": ["https://linkedin.com/in/mahdi-hooshmand"],
+      "email": "hooshmandm43@gmail.com",
+      "address": { "@type": "PostalAddress", "addressLocality": "Mashhad", "addressCountry": "IR" }
+    }
+    </script>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --bg: #0a0a0f;
+    --bg-elev: #111118;
+    --bg-soft: #1a1a24;
+    --fg: #e6edf3;
+    --fg-muted: #8b949e;
+    --fg-faint: #484f58;
+    --accent: #e9b872;
+    --accent-light: #f0c88a;
+    --line: #21262d;
+    --line-soft: #30363d;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--fg);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  .container-x { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+  h1, h2, h3 { color: #fff; }
+  h1 { font-size: clamp(2.5rem, 6vw, 5rem); line-height: 1.05; font-weight: 700; letter-spacing: -0.02em; }
+  h2 { font-size: clamp(1.5rem, 4vw, 2.5rem); line-height: 1.15; font-weight: 700; letter-spacing: -0.01em; }
+  h3 { font-size: 1.1rem; line-height: 1.3; font-weight: 600; }
+
+  a { color: inherit; text-decoration: none; }
+
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--fg-faint);
+  }
+
+  .section-space { padding: 96px 0; }
+  @media (min-width: 768px) { .section-space { padding: 128px 0; } }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.show { opacity: 1; transform: translateY(0); }
+  .delay-1 { transition-delay: 80ms; }
+  .delay-2 { transition-delay: 160ms; }
+
+  .border-t { border-top: 1px solid var(--line); }
+
+  ::selection { background: var(--accent); color: var(--bg); }
+
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--line-soft); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--fg-faint); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      scroll-behavior: auto !important;
+      transition: none !important;
+      animation: none !important;
+    }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>

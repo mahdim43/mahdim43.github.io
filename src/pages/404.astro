@@ -1,0 +1,21 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="404 - Page Not Found | Mahdi Hooshmand">
+  <div class="error-page">
+    <div class="container-x error-content">
+      <span class="eyebrow">[ 404 ]</span>
+      <h1 class="error-title">Page Not Found</h1>
+      <p class="error-desc">The page you're looking for doesn't exist or has been moved.</p>
+      <a href="/" class="btn btn-accent" style="margin-top: 32px;">Go Home</a>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .error-page { min-height: 100vh; display: flex; align-items: center; }
+  .error-content { text-align: center; }
+  .error-title { font-size: clamp(3rem, 8vw, 6rem); margin-top: 16px; margin-bottom: 16px; }
+  .error-desc { font-size: 18px; color: var(--fg-muted); max-width: 400px; margin: 0 auto; }
+</style>
