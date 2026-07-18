@@ -65,30 +65,60 @@ import Layout from '../layouts/Layout.astro';
       </div>
     </section>
 
-    <!-- STATS -->
-    <section class="stats-section border-t">
+    <!-- ABOUT -->
+    <section class="section-space border-t about-bg">
       <div class="container-x">
-        <div class="stats-grid">
-          <div class="stat-item">
-            <div class="stat-number-wrap">
-              <span class="stat-number" data-count="5">0</span><span class="stat-suffix">+</span>
+        <div class="about-layout">
+          <div class="about-left">
+            <span class="section-label">About</span>
+            <h2 class="section-title">I solve complex technical problems and build reliable systems.</h2>
+            <p class="about-text">
+              With over 5 years of hands-on experience in IT infrastructure, I've built deep expertise
+              across networking, VoIP, server virtualization, and enterprise resource planning. My work
+              spans from designing secure network architectures and deploying VoIP solutions for hotels
+              and call centers, to implementing Odoo ERP systems and managing Linux-based server environments.
+            </p>
+            <p class="about-text">
+              I enjoy solving complex technical problems and building reliable systems that help businesses
+              operate more efficiently. My mission is to simplify technology for organizations by designing
+              infrastructure, automation, and business systems that are stable, scalable, and easy to maintain.
+              I am particularly interested in bridging the gap between IT infrastructure and business processes.
+            </p>
+            <p class="about-text">
+              Unlike specialists who focus solely on infrastructure, I combine experience in networking,
+              Linux administration, virtualization, VoIP systems, databases, and ERP customization. This
+              allows me to understand both the technical foundation and the business processes that rely on it.
+              I can communicate with business stakeholders and translate operational requirements into
+              practical technical solutions.
+            </p>
+            <div class="skill-badges-inline">
+              <span class="skill-badge">MikroTik</span>
+              <span class="skill-badge">Cisco</span>
+              <span class="skill-badge">Asterisk</span>
+              <span class="skill-badge">Linux</span>
+              <span class="skill-badge">VMware</span>
+              <span class="skill-badge">Docker</span>
+              <span class="skill-badge">Odoo</span>
+              <span class="skill-badge">SQL</span>
+              <span class="skill-badge">VoIP</span>
+              <span class="skill-badge">VPN</span>
+              <span class="skill-badge">Firewall</span>
             </div>
-            <span class="stat-label">Years Experience</span>
-            <span class="stat-desc">In network infrastructure and IT systems</span>
           </div>
-          <div class="stat-item">
-            <div class="stat-number-wrap">
-              <span class="stat-number" data-count="30">0</span>
+          <div class="about-right">
+            <div class="about-card">
+              <span class="section-label">My Mission</span>
+              <p>To simplify technology for organizations by designing infrastructure, automation, and business
+              systems that are stable, scalable, and easy to maintain — bridging the gap between IT infrastructure
+              and business processes.</p>
             </div>
-            <span class="stat-label">Users Supported</span>
-            <span class="stat-desc">Small and mid-sized business environments</span>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number-wrap">
-              <span class="stat-number" data-count="4">0</span>
+            <div class="about-card">
+              <span class="section-label">My Vision</span>
+              <p>To become a solutions architect who can design complete business platforms — from infrastructure
+              and virtualization to ERP systems and process automation. I believe the future of IT is in
+              integrating infrastructure, cloud technologies, automation, and business applications into
+              unified solutions that reduce complexity and increase productivity.</p>
             </div>
-            <span class="stat-label">Major Projects</span>
-            <span class="stat-desc">VoIP, Network, ERP, and Containerization</span>
           </div>
         </div>
       </div>
@@ -442,15 +472,12 @@ import Layout from '../layouts/Layout.astro';
   .btn-outline { background: transparent; color: var(--fg); border: 1px solid var(--line); }
   .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
 
-  /* STATS */
-  .stats-section { padding: 80px 0; }
-  .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; }
-  .stat-item { border-top: 1px solid var(--line); padding-top: 24px; }
-  .stat-number-wrap { display: flex; align-items: baseline; }
-  .stat-number { font-family: 'Fraunces', serif; font-size: clamp(3.5rem, 8vw, 5.5rem); color: var(--accent); line-height: 1; }
-  .stat-suffix { font-family: 'Fraunces', serif; font-size: clamp(2rem, 5vw, 3rem); color: var(--accent); line-height: 1; margin-left: 4px; }
-  .stat-label { font-size: 1rem; font-weight: 600; color: #fff; margin-top: 8px; display: block; }
-  .stat-desc { font-size: 14px; color: var(--fg-muted); margin-top: 4px; display: block; }
+  /* ABOUT */
+  .about-bg { background: radial-gradient(120% 80% at 75% 30%, rgba(233,184,114,0.03) 0%, transparent 55%); }
+  .about-layout { display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px; align-items: start; }
+  .about-text { font-size: 15px; line-height: 1.7; color: var(--fg-muted); margin-bottom: 20px; }
+  .about-card { border: 1px solid var(--line); border-radius: 12px; padding: 28px; background: var(--bg-card); margin-bottom: 16px; }
+  .about-card p { font-size: 14px; line-height: 1.7; color: var(--fg-muted); margin-top: 12px; }
 
   /* SECTIONS */
   .section-title { margin-top: 12px; margin-bottom: 16px; }
@@ -519,6 +546,7 @@ import Layout from '../layouts/Layout.astro';
 
   /* RESPONSIVE */
   @media (max-width: 1024px) {
+    .about-layout { grid-template-columns: 1fr; gap: 40px; }
     .skills-layout { grid-template-columns: 1fr; gap: 40px; }
     .project-row { grid-template-columns: 1fr; gap: 24px; }
     .exp-layout { grid-template-columns: 1fr; gap: 40px; }
@@ -530,7 +558,7 @@ import Layout from '../layouts/Layout.astro';
     .hamburger { display: flex; }
     .hero-eyebrows { flex-direction: column; align-items: flex-start; gap: 4px; }
     .eyebrow-sep { display: none; }
-    .stats-grid { grid-template-columns: 1fr; gap: 24px; }
+    .about-layout { grid-template-columns: 1fr; gap: 40px; }
     .contact-layout { grid-template-columns: 1fr; gap: 40px; }
     .footer-inner { flex-direction: column; gap: 16px; text-align: center; }
     .footer-right { flex-wrap: wrap; justify-content: center; }
@@ -581,20 +609,16 @@ import Layout from '../layouts/Layout.astro';
     ease: 'power3.out'
   });
 
-  // Stats counter animation
-  document.querySelectorAll('.stat-number').forEach(function(el) {
-    var target = parseInt(el.getAttribute('data-count'));
-    gsap.fromTo(el, { textContent: 0 }, {
-      textContent: target,
-      duration: 2,
-      ease: 'power2.out',
-      snap: { textContent: 1 },
-      scrollTrigger: {
-        trigger: el,
-        start: 'top 80%',
-        once: true
-      }
-    });
+  // About section
+  gsap.from('.about-left', {
+    opacity: 0, x: -40, duration: 0.8,
+    ease: 'power3.out',
+    scrollTrigger: { trigger: '.about-layout', start: 'top 75%', once: true }
+  });
+  gsap.from('.about-card', {
+    opacity: 0, y: 30, duration: 0.6, stagger: 0.15,
+    ease: 'power3.out',
+    scrollTrigger: { trigger: '.about-right', start: 'top 80%', once: true }
   });
 
   // Section reveal animations
