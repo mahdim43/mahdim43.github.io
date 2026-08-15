@@ -52,6 +52,17 @@ test('public pages omit private and stale employment data', async ({ page }) => 
   }
 });
 
+test('Persian copy avoids prohibited Arabic letter forms', async ({ page }) => {
+  await page.goto('/fa/');
+  expect(await page.content()).not.toMatch(/[\u0622\u0623]/u);
+});
+
+test('Persian topology keeps Latin SVG labels isolated from RTL', async ({ page }) => {
+  await page.goto('/fa/');
+  await expect(page.locator('.topology svg')).toHaveCSS('direction', 'ltr');
+  await expect(page.locator('.node text').first()).toHaveCSS('direction', 'ltr');
+});
+
 test('language switch preserves the active section hash', async ({ page }) => {
   await page.goto('/#projects');
   await page.locator('[data-language-switch]').click();

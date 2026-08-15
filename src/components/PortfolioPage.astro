@@ -76,7 +76,7 @@ const emailHref = `mailto:${content.contact.email}`;
           <div class="hero-meta">
             <span>{content.hero.location}</span>
             <span class="meta-separator" aria-hidden="true"></span>
-            <span class="latin">{content.hero.discipline}</span>
+            <span class:list={{ latin: !isPersian }} dir={isPersian ? 'rtl' : 'ltr'}>{content.hero.discipline}</span>
           </div>
           <p class="hero-name">{content.hero.name}</p>
           <h1 id="hero-title">{content.hero.statement}</h1>
@@ -130,7 +130,7 @@ const emailHref = `mailto:${content.contact.email}`;
             <g class="node node-minor" transform="translate(133 520)"><circle r="8" /></g>
           </svg>
           <div class="topology-status">
-            <span><i></i>{isPersian ? 'سیستم‌ها قابل مشاهده‌اند' : 'systems observable'}</span>
+            <span><i></i>{isPersian ? 'سرویس‌ها در دسترس' : 'systems observable'}</span>
             <span class="latin">UTC +03:30</span>
           </div>
         </div>
@@ -384,13 +384,13 @@ const emailHref = `mailto:${content.contact.email}`;
   .topology-status { border-block-start: 1px solid var(--line); }
   .topology-status span { display: inline-flex; align-items: center; gap: 8px; }
   .topology-status i { width: 6px; height: 6px; border-radius: 50%; background: var(--oxidized); box-shadow: 0 0 10px var(--oxidized); }
-  .topology svg { width: 100%; }
+  .topology svg { width: 100%; direction: ltr; }
   .topology-grid path { fill: none; stroke: rgba(174,184,189,.06); stroke-width: 1; }
   .topology-links path { fill: none; stroke: var(--line-bright); stroke-width: 1.2; }
   .signal-path { fill: none; stroke: url(#signal-en); stroke-width: 2; stroke-linecap: round; stroke-dasharray: 2 22; animation: signal 8s linear infinite; }
   :global(html[lang^='fa']) .signal-path { stroke: url(#signal-fa); }
   .node circle { fill: var(--ink-soft); stroke: var(--oxidized); stroke-width: 2; }
-  .node text { fill: var(--muted); font: 400 10px var(--font-mono); letter-spacing: .08em; }
+  .node text { fill: var(--muted); direction: ltr; unicode-bidi: bidi-override; font: 400 10px var(--font-mono); letter-spacing: .08em; }
   .node-primary circle:first-child { fill: var(--surface); stroke: var(--copper-bright); filter: url(#glow-en); }
   :global(html[lang^='fa']) .node-primary circle:first-child { filter: url(#glow-fa); }
   .node-primary text { fill: var(--paper); }

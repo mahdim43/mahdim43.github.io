@@ -9,12 +9,12 @@ const vazir = readFileSync(resolve(root, 'node_modules/@fontsource-variable/vazi
 const copy = {
   en: {
     dir: 'ltr', label: 'SYSTEMS / INFRASTRUCTURE / ERP', name: 'MAHDI<br/>HOOSHMAND',
-    title: 'Systems & Infrastructure Specialist', statement: 'I make complex systems dependable.',
+    title: 'Systems & Infrastructure Specialist', statement: 'I find the problem and get systems working.',
     location: 'MASHHAD, IRAN  •  REMOTE', textSide: 'left', topologySide: 'right', font: 'Syne',
   },
   fa: {
     dir: 'rtl', label: 'سیستم / زیرساخت / ERP', name: 'مهدی<br/>هوشمند',
-    title: 'متخصص سیستم و زیرساخت', statement: 'سیستم‌های پیچیده را قابل‌اعتماد می‌کنم.',
+    title: 'متخصص سیستم و زیرساخت', statement: 'مشکل را پیدا می‌کنم و سیستم را به کار برمی‌گردانم.',
     location: 'مشهد، ایران  •  دورکاری', textSide: 'right', topologySide: 'left', font: 'Vazir',
   },
 };
