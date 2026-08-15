@@ -1,0 +1,636 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getPortfolio, type Locale } from '../data/portfolio';
+
+interface Props { locale: Locale }
+
+const { locale } = Astro.props;
+const content = getPortfolio(locale);
+const isPersian = locale === 'fa';
+const canonicalPath = isPersian ? '/fa/' : '/';
+const otherLanguagePath = isPersian ? '/' : '/fa/';
+const emailHref = `mailto:${content.contact.email}`;
+---
+
+<Layout
+  title={content.meta.title}
+  description={content.meta.description}
+  locale={content.locale}
+  htmlLocale={content.htmlLocale}
+  direction={content.direction}
+  openGraphLocale={content.openGraphLocale}
+  canonicalPath={canonicalPath}
+  image={content.meta.image}
+>
+  <a class="skip-link" href="#main-content">{content.ui.skip}</a>
+
+  <header class="site-header" data-header>
+    <div class="container header-grid">
+      <a class="identity" href={canonicalPath} aria-label={content.hero.name}>
+        <span class="identity-mark" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </span>
+        <span class="identity-copy">
+          <strong class:list={{ latin: isPersian }}>MH</strong>
+          <small>{isPersian ? 'سیستم / زیرساخت' : 'systems / infrastructure'}</small>
+        </span>
+      </a>
+
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-label={content.ui.menu}
+        aria-expanded="false"
+        aria-controls="site-navigation"
+        data-menu-toggle
+        data-open-label={content.ui.menu}
+        data-close-label={content.ui.closeMenu}
+      >
+        <span></span><span></span>
+      </button>
+
+      <nav id="site-navigation" class="site-nav" aria-label={content.ui.menu} data-navigation>
+        {content.navigation.map((item) => (
+          <a href={item.href} data-nav-link>{item.label}</a>
+        ))}
+      </nav>
+
+      <a
+        class="language-switch"
+        href={otherLanguagePath}
+        lang={isPersian ? 'en' : 'fa'}
+        hreflang={isPersian ? 'en' : 'fa'}
+        aria-label={content.ui.switchLanguage}
+        data-language-switch
+      >
+        <span class="language-dot" aria-hidden="true"></span>
+        {content.ui.otherLanguage}
+      </a>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero-grid">
+        <div class="hero-copy" data-reveal>
+          <div class="hero-meta">
+            <span>{content.hero.location}</span>
+            <span class="meta-separator" aria-hidden="true"></span>
+            <span class="latin">{content.hero.discipline}</span>
+          </div>
+          <p class="hero-name">{content.hero.name}</p>
+          <h1 id="hero-title">{content.hero.statement}</h1>
+          <p class="hero-role">{content.hero.title}</p>
+          <p class="hero-intro">{content.hero.introduction}</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#case-studies">
+              {content.ui.viewCaseStudies}
+              <svg aria-hidden="true" viewBox="0 0 20 20"><path d="M4 10h11M11 6l4 4-4 4" /></svg>
+            </a>
+            <a class="button button-secondary" href="/mahdi-hooshmand-cv.pdf" download>
+              {content.ui.downloadCv}
+              <svg aria-hidden="true" viewBox="0 0 20 20"><path d="M10 3v10m-4-4 4 4 4-4M4 17h12" /></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="topology" aria-hidden="true" data-reveal>
+          <div class="topology-label latin">LIVE TOPOLOGY / MH-01</div>
+          <svg viewBox="0 0 620 610" role="presentation">
+            <defs>
+              <linearGradient id={`signal-${locale}`} x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#d7a05c" />
+                <stop offset="1" stop-color="#71b7af" />
+              </linearGradient>
+              <filter id={`glow-${locale}`} x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="5" result="blur" />
+                <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+              </filter>
+            </defs>
+            <g class="topology-grid">
+              <path d="M40 90H580M40 190H580M40 290H580M40 390H580M40 490H580" />
+              <path d="M120 40V560M240 40V560M360 40V560M480 40V560" />
+            </g>
+            <g class="topology-links">
+              <path d="M118 146 248 221 367 132 496 254 405 405 230 449 118 356 248 221" />
+              <path d="M367 132 405 405M118 146 118 356M496 254 544 432M230 449 133 520" />
+            </g>
+            <path class="signal-path" d="M118 146 248 221 367 132 496 254 405 405 230 449 118 356" />
+            <g class="node node-primary" transform="translate(248 221)">
+              <circle r="42" /><circle class="node-pulse" r="42" />
+              <text text-anchor="middle" y="5">CORE</text>
+            </g>
+            <g class="node" transform="translate(118 146)"><circle r="22" /><text x="32" y="5">ERP</text></g>
+            <g class="node" transform="translate(367 132)"><circle r="18" /><text x="28" y="5">VM</text></g>
+            <g class="node" transform="translate(496 254)"><circle r="24" /><text x="34" y="5">SIP</text></g>
+            <g class="node" transform="translate(405 405)"><circle r="20" /><text x="30" y="5">NET</text></g>
+            <g class="node" transform="translate(230 449)"><circle r="17" /><text x="27" y="5">OPS</text></g>
+            <g class="node" transform="translate(118 356)"><circle r="20" /><text x="30" y="5">SQL</text></g>
+            <g class="node node-minor" transform="translate(544 432)"><circle r="8" /></g>
+            <g class="node node-minor" transform="translate(133 520)"><circle r="8" /></g>
+          </svg>
+          <div class="topology-status">
+            <span><i></i>{isPersian ? 'سیستم‌ها قابل مشاهده‌اند' : 'systems observable'}</span>
+            <span class="latin">UTC +03:30</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="metrics-band" aria-label={isPersian ? 'شاخص‌های تجربه' : 'Experience metrics'}>
+      <div class="container metrics-grid">
+        {content.metrics.map((metric, index) => (
+          <div class="metric" data-reveal>
+            <span class="metric-index latin">{String(index + 1).padStart(2, '0')}</span>
+            <strong>{metric.value}</strong>
+            <p>{metric.label}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section id="case-studies" class="section case-studies" aria-labelledby="case-studies-title">
+      <div class="container">
+        <header class="section-header" data-reveal>
+          <p class="eyebrow">{content.sectionCopy.caseStudies.eyebrow}</p>
+          <h2 id="case-studies-title">{content.sectionCopy.caseStudies.title}</h2>
+          <p>{content.sectionCopy.caseStudies.description}</p>
+        </header>
+
+        <div class="case-list">
+          {content.caseStudies.map((study, index) => (
+            <article class="case-card" data-reveal>
+              <div class="case-rail">
+                <span class="case-number latin">FIELD NOTE / {String(index + 1).padStart(2, '0')}</span>
+                <span class="case-category">{study.category}</span>
+              </div>
+              <div class="case-main">
+                <h3>{study.title}</h3>
+                <p class="case-summary">{study.summary}</p>
+                <div class="case-story">
+                  <div><span>{content.caseLabels.challenge}</span><p>{study.challenge}</p></div>
+                  <div><span>{content.caseLabels.action}</span><p>{study.action}</p></div>
+                  <div><span>{content.caseLabels.outcome}</span><p>{study.outcome}</p></div>
+                </div>
+                <div class="tag-list">
+                  {study.technologies.map((technology) => <span class="latin">{technology}</span>)}
+                </div>
+              </div>
+              <div class="case-metric">
+                <strong>{study.metric.value}</strong>
+                <span>{study.metric.label}</span>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" class="section experience" aria-labelledby="experience-title">
+      <div class="container split-layout">
+        <header class="section-header sticky-header" data-reveal>
+          <p class="eyebrow">{content.sectionCopy.experience.eyebrow}</p>
+          <h2 id="experience-title">{content.sectionCopy.experience.title}</h2>
+          <p>{content.sectionCopy.experience.description}</p>
+        </header>
+
+        <div class="timeline">
+          {content.experience.map((item) => (
+            <article class="timeline-item" data-reveal>
+              <span class="timeline-node" aria-hidden="true"></span>
+              <p class="timeline-period latin">{item.period}</p>
+              <p class="timeline-organization">{item.organization}</p>
+              <h3>{item.role}</h3>
+              <p class="timeline-summary">{item.summary}</p>
+              <ul>
+                {item.highlights.map((highlight) => <li>{highlight}</li>)}
+              </ul>
+              <div class="tag-list">
+                {item.technologies.map((technology) => <span class="latin">{technology}</span>)}
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="capabilities" class="section capabilities" aria-labelledby="capabilities-title">
+      <div class="container">
+        <header class="section-header wide-header" data-reveal>
+          <div>
+            <p class="eyebrow">{content.sectionCopy.capabilities.eyebrow}</p>
+            <h2 id="capabilities-title">{content.sectionCopy.capabilities.title}</h2>
+          </div>
+          <p>{content.sectionCopy.capabilities.description}</p>
+        </header>
+
+        <div class="capability-grid">
+          {content.capabilities.map((capability, index) => (
+            <article class="capability-card" data-reveal>
+              <span class="capability-index latin">{String(index + 1).padStart(2, '0')}</span>
+              <h3>{capability.title}</h3>
+              <p>{capability.description}</p>
+              <div class="tag-list">
+                {capability.technologies.map((technology) => <span class="latin">{technology}</span>)}
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section projects" aria-labelledby="projects-title">
+      <div class="container">
+        <header class="section-header" data-reveal>
+          <p class="eyebrow">{content.sectionCopy.projects.eyebrow}</p>
+          <h2 id="projects-title">{content.sectionCopy.projects.title}</h2>
+          <p>{content.sectionCopy.projects.description}</p>
+        </header>
+
+        <div class="project-grid">
+          {content.projects.map((project, index) => (
+            <article class="project-card" data-reveal>
+              <div class="project-topline">
+                <span class="latin">BUILD / {String(index + 1).padStart(2, '0')}</span>
+                <svg aria-hidden="true" viewBox="0 0 26 26"><path d="M4 13h17M15 7l6 6-6 6" /></svg>
+              </div>
+              <p class="project-type">{project.type}</p>
+              <h3 class="latin">{project.title}</h3>
+              <p>{project.description}</p>
+              <div class="tag-list">
+                {project.technologies.map((technology) => <span class="latin">{technology}</span>)}
+              </div>
+              <a href={project.url} target="_blank" rel="noopener noreferrer">
+                {content.ui.openProject}<span aria-hidden="true">↗</span>
+              </a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section credentials" aria-labelledby="credentials-title">
+      <div class="container">
+        <header class="section-header" data-reveal>
+          <p class="eyebrow">{content.sectionCopy.credentials.eyebrow}</p>
+          <h2 id="credentials-title">{content.sectionCopy.credentials.title}</h2>
+        </header>
+        <div class="credential-grid">
+          <article data-reveal>
+            <span>{content.credentials.education.label}</span>
+            <h3>{content.credentials.education.title}</h3>
+            <p>{content.credentials.education.detail}</p>
+            <strong class="latin">{content.credentials.education.period}</strong>
+          </article>
+          <article data-reveal>
+            <span>{content.credentials.certification.label}</span>
+            <h3 class="latin">{content.credentials.certification.title}</h3>
+            <p class="latin">{content.credentials.certification.detail}</p>
+          </article>
+          <article data-reveal>
+            <span>{content.credentials.languages.label}</span>
+            {content.credentials.languages.items.map((language) => <h3>{language}</h3>)}
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact" aria-labelledby="contact-title">
+      <div class="container contact-grid">
+        <div data-reveal>
+          <p class="eyebrow">{content.sectionCopy.contact.eyebrow}</p>
+          <h2 id="contact-title">{content.sectionCopy.contact.title}</h2>
+          <p class="contact-copy">{content.sectionCopy.contact.description}</p>
+          <div class="availability"><span aria-hidden="true"></span>{content.ui.available}</div>
+        </div>
+        <div class="contact-panel" data-reveal>
+          <a class="email-link latin" href={emailHref}>{content.contact.email}</a>
+          <div class="contact-actions">
+            <a class="button button-primary" href={emailHref}>Email</a>
+            <a class="button button-secondary" href={content.contact.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+            <a class="button button-secondary" href={content.contact.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+          </div>
+          <dl>
+            <div><dt>{isPersian ? 'موقعیت' : 'Location'}</dt><dd>{content.contact.location}</dd></div>
+            <div><dt>{isPersian ? 'همکاری' : 'Availability'}</dt><dd>{content.contact.availability}</dd></div>
+          </dl>
+          <a class="cv-link" href="/mahdi-hooshmand-cv.pdf" download>
+            <span>{content.ui.downloadCv}</span><span aria-hidden="true">↓ PDF</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div><strong class="latin">MH / 2026</strong><span>{content.footer}</span></div>
+      <a href="#main-content">{isPersian ? 'بازگشت به بالا ↑' : 'Back to top ↑'}</a>
+    </div>
+  </footer>
+</Layout>
+
+<style>
+  .skip-link { position: fixed; z-index: 200; inset-block-start: 12px; inset-inline-start: 12px; padding: 10px 16px; color: var(--ink); background: var(--copper-bright); transform: translateY(-150%); transition: transform .2s ease; }
+  .skip-link:focus { transform: translateY(0); }
+  .site-header { position: fixed; z-index: 100; inset-block-start: 0; inset-inline: 0; background: rgba(11,14,16,.84); border-block-end: 1px solid transparent; backdrop-filter: blur(18px); transition: border-color .25s ease, background .25s ease; }
+  .site-header[data-scrolled='true'] { border-color: var(--line); background: rgba(11,14,16,.96); }
+  .header-grid { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 38px; min-height: 78px; }
+  .identity { display: inline-flex; align-items: center; gap: 12px; }
+  .identity-mark { position: relative; width: 34px; height: 34px; border: 1px solid var(--line-bright); transform: rotate(45deg); }
+  .identity-mark span { position: absolute; width: 6px; height: 6px; border-radius: 50%; background: var(--copper); }
+  .identity-mark span:nth-child(1) { inset-block-start: 5px; inset-inline-start: 5px; }
+  .identity-mark span:nth-child(2) { inset-block-start: 14px; inset-inline-start: 14px; background: var(--oxidized); }
+  .identity-mark span:nth-child(3) { inset-block-end: 5px; inset-inline-end: 5px; }
+  .identity-copy { display: flex; flex-direction: column; line-height: 1.1; }
+  .identity-copy strong { font: 700 14px/1 var(--font-display); letter-spacing: .08em; }
+  .identity-copy small { margin-block-start: 5px; color: var(--quiet); font: 400 9px/1 var(--font-mono); letter-spacing: .06em; }
+  .site-nav { display: flex; align-items: center; justify-content: center; gap: clamp(16px,2.3vw,34px); }
+  .site-nav a { position: relative; color: var(--muted); font-size: 12px; font-weight: 600; }
+  .site-nav a::after { content: ''; position: absolute; inset-inline: 0; inset-block-end: -9px; height: 1px; background: var(--copper); transform: scaleX(0); transition: transform .2s ease; }
+  .site-nav a:hover, .site-nav a[aria-current='true'] { color: var(--paper); }
+  .site-nav a[aria-current='true']::after { transform: scaleX(1); }
+  .language-switch { display: inline-flex; align-items: center; gap: 9px; padding: 8px 13px; border: 1px solid var(--line-bright); color: var(--paper-soft); font-size: 12px; }
+  .language-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--oxidized); box-shadow: 0 0 0 4px rgba(113,183,175,.1); }
+  .menu-toggle { display: none; border: 0; background: transparent; }
+
+  .hero { position: relative; min-height: 820px; padding-block: 150px 90px; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at 73% 40%, rgba(215,160,92,.08), transparent 28%), radial-gradient(circle at 82% 34%, rgba(113,183,175,.05), transparent 22%); }
+  :global(html[dir='rtl']) .hero::before { transform: scaleX(-1); }
+  .hero-grid { position: relative; display: grid; grid-template-columns: minmax(0,1.03fr) minmax(420px,.97fr); align-items: center; gap: 46px; }
+  .hero-copy { position: relative; z-index: 2; }
+  .hero-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-block-end: 34px; color: var(--muted); font: 400 11px/1.4 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; }
+  .meta-separator { width: 26px; height: 1px; background: var(--copper); }
+  .hero-name { margin: 0 0 10px; color: var(--copper-bright); font: 500 13px/1.4 var(--font-mono); letter-spacing: .1em; text-transform: uppercase; }
+  h1 { max-width: 760px; margin: 0; font: 650 clamp(54px,7vw,104px)/.94 var(--font-display); letter-spacing: -.055em; }
+  :global(html[lang^='fa']) h1 { font-family: var(--font-fa); font-weight: 800; letter-spacing: -.045em; line-height: 1.15; }
+  .hero-role { margin: 25px 0 0; color: var(--paper-soft); font-size: clamp(18px,2vw,25px); font-weight: 600; }
+  .hero-intro { max-width: 660px; margin: 25px 0 0; color: var(--muted); font-size: clamp(16px,1.4vw,19px); line-height: 1.85; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-block-start: 36px; }
+  .button { display: inline-flex; min-height: 48px; align-items: center; justify-content: center; gap: 10px; padding: 10px 20px; border: 1px solid var(--line-bright); font-size: 13px; font-weight: 700; transition: transform .2s ease, border-color .2s ease, background .2s ease; }
+  .button:hover { transform: translateY(-2px); border-color: var(--copper); }
+  .button svg { width: 18px; fill: none; stroke: currentColor; stroke-width: 1.5; }
+  :global(html[dir='rtl']) .button svg { transform: scaleX(-1); }
+  .button-primary { color: var(--ink); background: var(--copper-bright); border-color: var(--copper-bright); }
+  .button-primary:hover { background: #f6ca8d; }
+  .button-secondary { color: var(--paper); background: rgba(255,255,255,.02); }
+
+  .topology { position: relative; min-width: 0; border: 1px solid var(--line); background: rgba(16,21,25,.54); box-shadow: 0 30px 80px var(--shadow); clip-path: polygon(0 0,calc(100% - 28px) 0,100% 28px,100% 100%,28px 100%,0 calc(100% - 28px)); }
+  .topology::before, .topology::after { content: ''; position: absolute; z-index: 2; background: var(--copper); }
+  .topology::before { inset-block-start: 0; inset-inline-end: 27px; width: 40px; height: 1px; transform: rotate(45deg); transform-origin: right; }
+  .topology::after { inset-block-end: 0; inset-inline-start: 27px; width: 40px; height: 1px; transform: rotate(45deg); transform-origin: left; }
+  .topology-label, .topology-status { display: flex; align-items: center; justify-content: space-between; min-height: 42px; padding-inline: 18px; color: var(--quiet); font: 400 9px/1 var(--font-mono); letter-spacing: .08em; }
+  .topology-label { border-block-end: 1px solid var(--line); }
+  .topology-status { border-block-start: 1px solid var(--line); }
+  .topology-status span { display: inline-flex; align-items: center; gap: 8px; }
+  .topology-status i { width: 6px; height: 6px; border-radius: 50%; background: var(--oxidized); box-shadow: 0 0 10px var(--oxidized); }
+  .topology svg { width: 100%; }
+  .topology-grid path { fill: none; stroke: rgba(174,184,189,.06); stroke-width: 1; }
+  .topology-links path { fill: none; stroke: var(--line-bright); stroke-width: 1.2; }
+  .signal-path { fill: none; stroke: url(#signal-en); stroke-width: 2; stroke-linecap: round; stroke-dasharray: 2 22; animation: signal 8s linear infinite; }
+  :global(html[lang^='fa']) .signal-path { stroke: url(#signal-fa); }
+  .node circle { fill: var(--ink-soft); stroke: var(--oxidized); stroke-width: 2; }
+  .node text { fill: var(--muted); font: 400 10px var(--font-mono); letter-spacing: .08em; }
+  .node-primary circle:first-child { fill: var(--surface); stroke: var(--copper-bright); filter: url(#glow-en); }
+  :global(html[lang^='fa']) .node-primary circle:first-child { filter: url(#glow-fa); }
+  .node-primary text { fill: var(--paper); }
+  .node-pulse { fill: none !important; stroke: var(--copper) !important; animation: pulse-ring 3s ease-out infinite; }
+  .node-minor circle { fill: var(--copper); stroke: none; }
+  @keyframes signal { to { stroke-dashoffset: -240; } }
+  @keyframes pulse-ring { 0% { opacity: .7; transform: scale(1); } 80%,100% { opacity: 0; transform: scale(1.65); } }
+
+  .metrics-band { border-block: 1px solid var(--line); background: rgba(16,21,25,.86); }
+  .metrics-grid { display: grid; grid-template-columns: repeat(4,1fr); }
+  .metric { position: relative; min-height: 176px; padding: 28px; border-inline-end: 1px solid var(--line); }
+  .metric:first-child { border-inline-start: 1px solid var(--line); }
+  .metric-index { display: block; margin-block-end: 24px; color: var(--quiet); font: 400 9px/1 var(--font-mono); }
+  .metric strong { display: block; color: var(--copper-bright); font: 650 clamp(32px,3.4vw,50px)/1 var(--font-display); letter-spacing: -.04em; }
+  :global(html[lang^='fa']) .metric strong { font-family: var(--font-fa); }
+  .metric p { max-width: 220px; margin: 12px 0 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
+
+  .section { padding-block: 130px; scroll-margin-top: 76px; border-block-end: 1px solid var(--line); }
+  .section-header { max-width: 760px; margin-block-end: 62px; }
+  .eyebrow { margin: 0 0 18px; color: var(--copper-bright) !important; font: 400 10px/1.4 var(--font-mono) !important; letter-spacing: .13em; text-transform: uppercase; }
+  .eyebrow::before { content: '◆'; margin-inline-end: 9px; font-size: 7px; }
+  .section-header h2, .contact h2 { margin: 0; font: 650 clamp(35px,5vw,66px)/1.04 var(--font-display); letter-spacing: -.045em; }
+  :global(html[lang^='fa']) .section-header h2, :global(html[lang^='fa']) .contact h2 { font-family: var(--font-fa); font-weight: 800; letter-spacing: -.035em; line-height: 1.25; }
+  .section-header > p:last-child { max-width: 650px; margin: 22px 0 0; color: var(--muted); font-size: 16px; }
+
+  .case-list { display: grid; gap: 18px; }
+  .case-card { display: grid; grid-template-columns: 150px minmax(0,1fr) 180px; gap: 34px; padding: 34px; border: 1px solid var(--line); background: linear-gradient(120deg,rgba(255,255,255,.025),rgba(255,255,255,.008)); transition: border-color .25s ease, transform .25s ease; }
+  .case-card:hover { border-color: var(--line-bright); transform: translateY(-3px); }
+  .case-rail { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; border-inline-end: 1px solid var(--line); }
+  .case-number { color: var(--quiet); font: 400 9px/1.3 var(--font-mono); letter-spacing: .08em; }
+  .case-category { max-width: 110px; color: var(--oxidized); font-size: 12px; font-weight: 700; }
+  .case-main h3, .timeline h3, .project-card h3 { margin: 0; font: 650 clamp(22px,2.6vw,34px)/1.2 var(--font-display); letter-spacing: -.025em; }
+  :global(html[lang^='fa']) .case-main h3, :global(html[lang^='fa']) .timeline h3 { font-family: var(--font-fa); font-weight: 750; line-height: 1.5; }
+  .case-summary { max-width: 760px; margin: 14px 0 28px; color: var(--paper-soft); }
+  .case-story { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; }
+  .case-story div { padding-block-start: 14px; border-block-start: 1px solid var(--line); }
+  .case-story span { color: var(--copper); font: 400 9px/1.3 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; }
+  .case-story p { margin: 9px 0 0; color: var(--muted); font-size: 13px; line-height: 1.7; }
+  .case-metric { display: flex; flex-direction: column; justify-content: flex-end; padding-inline-start: 24px; border-inline-start: 1px solid var(--line); }
+  .case-metric strong { color: var(--copper-bright); font: 650 37px/1 var(--font-display); }
+  :global(html[lang^='fa']) .case-metric strong { font-family: var(--font-fa); }
+  .case-metric span { margin-block-start: 11px; color: var(--muted); font-size: 11px; line-height: 1.5; }
+  .tag-list { display: flex; flex-wrap: wrap; gap: 7px; margin-block-start: 24px; }
+  .tag-list span { padding: 4px 9px; color: var(--muted); background: rgba(255,255,255,.02); border: 1px solid var(--line); font: 400 9px/1.4 var(--font-mono); }
+
+  .experience { background: var(--ink-soft); }
+  .split-layout { display: grid; grid-template-columns: minmax(260px,.72fr) minmax(0,1.28fr); gap: clamp(50px,8vw,120px); align-items: start; }
+  .sticky-header { position: sticky; inset-block-start: 120px; margin: 0; }
+  .timeline { position: relative; border-inline-start: 1px solid var(--line-bright); }
+  .timeline-item { position: relative; padding: 0 0 58px 40px; }
+  :global(html[dir='rtl']) .timeline-item { padding: 0 40px 58px 0; }
+  .timeline-item:last-child { padding-block-end: 0; }
+  .timeline-node { position: absolute; inset-block-start: 5px; inset-inline-start: -6px; width: 11px; height: 11px; background: var(--ink-soft); border: 2px solid var(--copper); transform: rotate(45deg); }
+  .timeline-period { margin: 0; color: var(--copper); font: 400 10px/1.4 var(--font-mono); letter-spacing: .06em; }
+  .timeline-organization { margin: 9px 0 4px; color: var(--quiet); font-size: 12px; }
+  .timeline h3 { font-size: clamp(21px,2.1vw,29px); }
+  .timeline-summary { margin: 14px 0 0; color: var(--paper-soft); }
+  .timeline ul { display: grid; gap: 8px; margin: 18px 0 0; padding: 0; list-style: none; color: var(--muted); font-size: 13px; }
+  .timeline li { position: relative; padding-inline-start: 18px; }
+  .timeline li::before { content: ''; position: absolute; inset-block-start: .8em; inset-inline-start: 0; width: 7px; height: 1px; background: var(--oxidized); }
+
+  .wide-header { display: grid; grid-template-columns: minmax(0,1.1fr) minmax(280px,.6fr); gap: 70px; align-items: end; max-width: none; }
+  .wide-header > p:last-child { margin: 0; }
+  .capability-grid { display: grid; grid-template-columns: repeat(12,1fr); gap: 12px; }
+  .capability-card { grid-column: span 4; min-height: 285px; padding: 28px; border: 1px solid var(--line); background: rgba(21,27,32,.64); }
+  .capability-card:nth-child(4), .capability-card:nth-child(5) { grid-column: span 6; }
+  .capability-index { display: block; color: var(--quiet); font: 400 9px/1 var(--font-mono); }
+  .capability-card h3 { margin: 48px 0 0; font-size: 20px; }
+  .capability-card > p { min-height: 54px; margin: 12px 0 0; color: var(--muted); font-size: 13px; }
+
+  .projects { background: linear-gradient(180deg,var(--ink),#10171a); }
+  .project-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 18px; }
+  .project-card { display: flex; min-height: 440px; flex-direction: column; padding: 34px; border: 1px solid var(--line); background: var(--surface); transition: transform .25s ease, border-color .25s ease; }
+  .project-card:hover { transform: translateY(-4px); border-color: var(--oxidized); }
+  .project-topline { display: flex; justify-content: space-between; color: var(--quiet); font: 400 9px/1 var(--font-mono); letter-spacing: .08em; }
+  .project-topline svg { width: 26px; fill: none; stroke: var(--oxidized); stroke-width: 1.3; }
+  :global(html[dir='rtl']) .project-topline svg { transform: scaleX(-1); }
+  .project-type { margin: 68px 0 8px; color: var(--copper); font-size: 12px; }
+  .project-card h3 { font-size: clamp(31px,4vw,52px); }
+  .project-card > p:not(.project-type) { margin: 18px 0 0; color: var(--muted); }
+  .project-card .tag-list { margin-block-end: 30px; }
+  .project-card > a { display: inline-flex; justify-content: space-between; margin-block-start: auto; padding-block-start: 18px; border-block-start: 1px solid var(--line); color: var(--paper-soft); font-size: 12px; font-weight: 700; }
+  .project-card > a:hover { color: var(--copper-bright); }
+
+  .credentials { padding-block: 100px; }
+  .credential-grid { display: grid; grid-template-columns: 1.4fr 1fr .8fr; border-block-start: 1px solid var(--line); border-inline-start: 1px solid var(--line); }
+  .credential-grid article { min-height: 230px; padding: 28px; border-block-end: 1px solid var(--line); border-inline-end: 1px solid var(--line); }
+  .credential-grid article > span { color: var(--copper); font: 400 9px/1.3 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; }
+  .credential-grid h3 { margin: 38px 0 0; font-size: 19px; line-height: 1.5; }
+  .credential-grid p { margin: 9px 0 0; color: var(--muted); font-size: 13px; }
+  .credential-grid strong { display: block; margin-block-start: 20px; color: var(--quiet); font: 400 10px/1 var(--font-mono); }
+
+  .contact { background: var(--paper); color: var(--ink); }
+  .contact .eyebrow { color: #7f5729 !important; }
+  .contact-grid { display: grid; grid-template-columns: minmax(0,1fr) minmax(360px,.72fr); gap: clamp(50px,9vw,130px); align-items: start; }
+  .contact h2 { max-width: 720px; }
+  .contact-copy { max-width: 650px; margin: 24px 0 0; color: #4f595e; font-size: 17px; }
+  .availability { display: inline-flex; align-items: center; gap: 10px; margin-block-start: 28px; padding: 8px 13px; border: 1px solid #b8b0a4; color: #374246; font-size: 12px; font-weight: 700; }
+  .availability span { width: 7px; height: 7px; border-radius: 50%; background: #438b80; box-shadow: 0 0 0 4px rgba(67,139,128,.12); }
+  .contact-panel { padding: 30px; background: #e3ded4; border: 1px solid #c8c0b5; }
+  .email-link { display: block; padding-block-end: 22px; border-block-end: 1px solid #c8c0b5; font-size: clamp(16px,1.8vw,21px); font-weight: 700; overflow-wrap: anywhere; }
+  .contact-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-block: 24px; }
+  .contact .button-primary { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+  .contact .button-secondary { border-color: #a8a196; color: var(--ink); background: transparent; }
+  .contact dl { margin: 0; border-block-start: 1px solid #c8c0b5; }
+  .contact dl div { display: grid; grid-template-columns: 100px 1fr; gap: 16px; padding-block: 13px; border-block-end: 1px solid #c8c0b5; }
+  .contact dt { color: #4f595e; font-size: 11px; }
+  .contact dd { margin: 0; font-size: 12px; font-weight: 650; }
+  .cv-link { display: flex; justify-content: space-between; margin-block-start: 24px; font-size: 12px; font-weight: 800; }
+
+  .site-footer { padding-block: 34px; background: var(--ink); }
+  .footer-grid { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+  .footer-grid > div { display: flex; align-items: center; gap: 20px; }
+  .footer-grid strong { color: var(--copper); font: 400 10px/1 var(--font-mono); }
+  .footer-grid span, .footer-grid a { color: var(--quiet); font-size: 11px; }
+  .footer-grid a:hover { color: var(--paper); }
+
+  :global(.js [data-reveal]) { opacity: 1; transform: translateY(18px); transition: transform .7s cubic-bezier(.2,.75,.25,1); }
+  :global(.js [data-reveal].is-visible) { transform: translateY(0); }
+
+  @media (max-width: 1024px) {
+    .header-grid { grid-template-columns: auto 1fr auto; }
+    .site-nav { display: none; }
+    .menu-toggle { display: flex; grid-column: 2; grid-row: 1; justify-self: end; width: 42px; height: 42px; flex-direction: column; align-items: center; justify-content: center; gap: 7px; padding: 0; border: 1px solid var(--line); cursor: pointer; }
+    .menu-toggle span { width: 18px; height: 1px; background: var(--paper); transition: transform .2s ease; }
+    .menu-toggle[aria-expanded='true'] span:first-child { transform: translateY(4px) rotate(45deg); }
+    .menu-toggle[aria-expanded='true'] span:last-child { transform: translateY(-4px) rotate(-45deg); }
+    .site-nav[data-open='true'] { display: flex; position: fixed; inset-block-start: 78px; inset-inline: 0; flex-direction: column; align-items: stretch; gap: 0; padding: 12px 20px 20px; background: rgba(11,14,16,.98); border-block-end: 1px solid var(--line); }
+    .site-nav[data-open='true'] a { padding: 14px 0; border-block-end: 1px solid var(--line); font-size: 14px; }
+    .language-switch { grid-column: 3; }
+    .hero { min-height: auto; }
+    .hero-grid { grid-template-columns: 1fr; }
+    .topology { width: min(100%,620px); margin-inline: auto; }
+    .metrics-grid { grid-template-columns: repeat(2,1fr); }
+    .metric:nth-child(3) { border-inline-start: 1px solid var(--line); border-block-start: 1px solid var(--line); }
+    .metric:nth-child(4) { border-block-start: 1px solid var(--line); }
+    .case-card { grid-template-columns: 110px minmax(0,1fr); }
+    .case-metric { grid-column: 2; padding: 22px 0 0; border-inline-start: 0; border-block-start: 1px solid var(--line); }
+    .case-metric span { max-width: 240px; }
+    .split-layout { grid-template-columns: 1fr; }
+    .sticky-header { position: static; }
+    .wide-header { grid-template-columns: 1fr; gap: 22px; }
+    .capability-card { grid-column: span 6; }
+    .capability-card:last-child { grid-column: span 12; }
+    .contact-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 700px) {
+    .header-grid { gap: 10px; min-height: 70px; }
+    .identity-copy small { display: none; }
+    .language-switch { padding: 7px 9px; }
+    .site-nav[data-open='true'] { inset-block-start: 70px; }
+    .hero { padding-block: 125px 70px; }
+    .hero-meta { margin-block-end: 25px; }
+    h1 { font-size: clamp(47px,15vw,72px); }
+    .hero-intro { font-size: 15px; }
+    .topology-label, .topology-status { padding-inline: 12px; }
+    .metrics-grid { grid-template-columns: 1fr; }
+    .metric, .metric:first-child, .metric:nth-child(3), .metric:nth-child(4) { min-height: 145px; border-inline: 1px solid var(--line); border-block-start: 1px solid var(--line); }
+    .metric:first-child { border-block-start: 0; }
+    .section { padding-block: 90px; }
+    .section-header { margin-block-end: 44px; }
+    .case-card { grid-template-columns: 1fr; gap: 24px; padding: 23px; }
+    .case-rail { flex-direction: row; justify-content: space-between; padding-block-end: 15px; border-inline-end: 0; border-block-end: 1px solid var(--line); }
+    .case-category { max-width: none; }
+    .case-story { grid-template-columns: 1fr; }
+    .case-metric { grid-column: 1; }
+    .timeline-item, :global(html[dir='rtl']) .timeline-item { padding-inline-start: 27px; padding-inline-end: 0; }
+    :global(html[dir='rtl']) .timeline-item { padding-inline-start: 0; padding-inline-end: 27px; }
+    .capability-grid, .project-grid { grid-template-columns: 1fr; }
+    .capability-card, .capability-card:nth-child(4), .capability-card:nth-child(5), .capability-card:last-child { grid-column: 1; }
+    .project-card { min-height: 400px; padding: 25px; }
+    .credential-grid { grid-template-columns: 1fr; }
+    .contact-panel { padding: 22px; }
+    .footer-grid, .footer-grid > div { align-items: flex-start; flex-direction: column; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :global(.js [data-reveal]) { opacity: 1; transform: none; }
+    .signal-path, .node-pulse { animation: none; }
+  }
+</style>
+
+<script>
+  document.documentElement.classList.add('js');
+
+  const header = document.querySelector<HTMLElement>('[data-header]');
+  const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const navigation = document.querySelector<HTMLElement>('[data-navigation]');
+  const navLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-nav-link]'));
+  const languageSwitch = document.querySelector<HTMLAnchorElement>('[data-language-switch]');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const closeMenu = () => {
+    if (!toggle || !navigation) return;
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', toggle.dataset.openLabel ?? 'Open navigation');
+    navigation.dataset.open = 'false';
+  };
+
+  toggle?.addEventListener('click', () => {
+    if (!navigation) return;
+    const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!isOpen));
+    toggle.setAttribute('aria-label', isOpen ? toggle.dataset.openLabel ?? '' : toggle.dataset.closeLabel ?? '');
+    navigation.dataset.open = String(!isOpen);
+  });
+
+  navLinks.forEach((link) => link.addEventListener('click', closeMenu));
+  window.addEventListener('scroll', () => { if (header) header.dataset.scrolled = String(window.scrollY > 18); }, { passive: true });
+
+  languageSwitch?.addEventListener('click', (event) => {
+    event.preventDefault();
+    const target = new URL(languageSwitch.href);
+    target.hash = window.location.hash;
+    window.location.href = target.href;
+  });
+
+  const sections = Array.from(document.querySelectorAll<HTMLElement>('main section[id]'));
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      navLinks.forEach((link) => link.removeAttribute('aria-current'));
+      const active = navLinks.find((link) => link.hash === `#${entry.target.id}`);
+      active?.setAttribute('aria-current', 'true');
+    });
+  }, { rootMargin: '-25% 0px -65%', threshold: 0 });
+  sections.forEach((section) => sectionObserver.observe(section));
+
+  const reveals = Array.from(document.querySelectorAll<HTMLElement>('[data-reveal]'));
+  if (reduceMotion || !('IntersectionObserver' in window)) {
+    reveals.forEach((item) => item.classList.add('is-visible'));
+  } else {
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      });
+    }, { rootMargin: '0px 0px -8%', threshold: .08 });
+    reveals.forEach((item) => revealObserver.observe(item));
+  }
+</script>

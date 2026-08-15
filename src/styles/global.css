@@ -1,0 +1,83 @@
+:root {
+  --ink: #0b0e10;
+  --ink-soft: #101519;
+  --surface: #151b20;
+  --surface-raised: #1a2228;
+  --paper: #f2eee6;
+  --paper-soft: #d9d5ce;
+  --muted: #aeb8bd;
+  --quiet: #7e8a90;
+  --copper: #d7a05c;
+  --copper-bright: #efbb73;
+  --oxidized: #71b7af;
+  --line: #283139;
+  --line-bright: #3b474f;
+  --shadow: rgba(0, 0, 0, 0.32);
+  --font-display: 'Syne Variable', 'Vazirmatn Variable', sans-serif;
+  --font-body: 'Manrope Variable', 'Vazirmatn Variable', sans-serif;
+  --font-fa: 'Vazirmatn Variable', Tahoma, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'Vazirmatn Variable', monospace;
+  --container: 1180px;
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  background: var(--ink);
+  color-scheme: dark;
+  scrollbar-gutter: stable;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  overflow-x: hidden;
+  color: var(--paper);
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.012) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.012) 1px, transparent 1px),
+    var(--ink);
+  background-size: 48px 48px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+html[lang^='fa'] body {
+  font-family: var(--font-fa);
+  line-height: 1.9;
+}
+
+button, a { font: inherit; }
+a { color: inherit; text-decoration: none; }
+button { color: inherit; }
+img, svg { display: block; max-width: 100%; }
+
+::selection { color: var(--ink); background: var(--copper-bright); }
+:focus-visible { outline: 3px solid var(--copper-bright); outline-offset: 4px; }
+
+.container {
+  width: min(calc(100% - 40px), var(--container));
+  margin-inline: auto;
+}
+
+.latin { direction: ltr; unicode-bidi: isolate; }
+
+@media (max-width: 640px) {
+  .container { width: min(calc(100% - 28px), var(--container)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
