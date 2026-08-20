@@ -14,7 +14,7 @@ const copy = {
   },
   fa: {
     dir: 'rtl', label: 'سیستم / زیرساخت / ERP', name: 'مهدی<br/>هوشمند',
-    title: 'متخصص سیستم و زیرساخت', statement: 'مشکل را پیدا می‌کنم و سیستم را به کار برمی‌گردانم.',
+    title: 'متخصص سیستم و زیرساخت', statement: 'عیب‌یابی زیرساخت، پایداری سرویس، حل مشکل.',
     location: 'مشهد، ایران  •  دورکاری', textSide: 'right', topologySide: 'left', font: 'Vazir',
   },
 };
